@@ -1,4 +1,3 @@
-pipeline {
   agent none
     stages {
         stage('Build') { 
@@ -20,7 +19,12 @@ pipeline {
                 }
             }
             steps {
-                   sh "sonar-scanner -Dsonar.projectBaseDir=/var/jenkins_home/workspace/spring-petclinic/target -Dsonar.host.url='http://130.61.159.221:9000'"
+                   sh "sonar-scanner -Dsonar.projectBaseDir=./target -Dsonar.host.url='http://130.61.159.221:9000'"
+            }
+       }
+	   stage('Build image') {
+            steps {
+                   app = docker.build("ntamarkin/noam-jenkins-maven")
             }
        }
    }
