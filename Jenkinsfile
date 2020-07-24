@@ -1,5 +1,6 @@
-node {
-    def app
+pipeline {
+  agent none
+    stages {
         stage('Build') { 
             agent {
                 docker {
@@ -24,7 +25,8 @@ node {
        }
 	   stage('Build image') {
             steps {
-                   app = docker.build("ntamarkin/noam-jenkins-maven")
+                   sh "docker build -t ntamarkin/noam-jenkins-maven ."
             }
        }
+   }
 }
