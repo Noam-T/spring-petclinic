@@ -13,8 +13,8 @@ pipeline {
         }
        stage('SonarQube analysis') {
             steps {
-			    withSonarQubeEnv(credentialsId: '0063ea06-c287-4d20-9532-6c29e75b3071', installationName: 'Sonar') {
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+                docker.image('newtmitch/sonar-scanner').inside('-v /var/run/docker.sock:/var/run/docker.sock --entrypoint=""') {
+                   sh "sonar-scanner -Dsonar.projectBaseDir=./target -Dsonar.host.url='http://130.61.159.221:9000'"
                 }
             }
        }
