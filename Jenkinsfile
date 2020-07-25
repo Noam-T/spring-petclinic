@@ -25,7 +25,7 @@ pipeline {
        }
 	   stage('Build image') {
             steps {
-                   docker build -t ntamarkin/noam-jenkins-maven .
+                    node { sh "docker build -t ntamarkin/noam-jenkins-maven ." }
             }
        }
    }
