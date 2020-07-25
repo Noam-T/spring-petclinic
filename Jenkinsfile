@@ -1,5 +1,5 @@
 pipeline {
-  agent none
+  agent any
     stages {
         stage('Build') { 
             agent {
@@ -25,7 +25,7 @@ pipeline {
        }
 	   stage('Build image') {
             steps {
-                    node { sh "docker build -t ntamarkin/noam-jenkins-maven ." }
+                    sh "docker build -t ntamarkin/noam-jenkins-maven ." 
             }
        }
    }
